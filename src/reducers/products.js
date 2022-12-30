@@ -1,9 +1,11 @@
 import { 
+	GET_PRODUCTS,
 	GET_PRODUCTS_SUCCESS, 
 	GET_PRODUCTS_FAILED 
 } from "../actions/types";
 
 const initialState = {
+	selectedCategory: 'all',
 	products: [],
 	loading: false,
 	error: null
@@ -11,6 +13,11 @@ const initialState = {
 
 function productsReducer(state = initialState, action) {
 	switch (action.type) {
+		case GET_PRODUCTS:
+			return {
+				...state,
+				selectedCategory: action.payload
+			};
 		case GET_PRODUCTS_SUCCESS: 
 			return {
 				...state,

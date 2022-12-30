@@ -1,7 +1,8 @@
 import { 
 	GET_CURRENCIES,
 	GET_CURRENCIES_SUCCESS, 
-	GET_CURRENCIES_FAILED 
+	GET_CURRENCIES_FAILED,
+	GET_CURRENCY_TYPE
 } from "./types";
 
 const CurrenciesActions = {
@@ -20,6 +21,12 @@ const CurrenciesActions = {
 		return {
 			type: GET_CURRENCIES_FAILED,
 			payload: error
+		}
+	},
+	GetCurrencyType: (currencyType) => {
+		return {
+			type: GET_CURRENCY_TYPE,
+			payload: currencyType
 		}
 	}
 }

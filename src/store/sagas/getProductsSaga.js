@@ -1,8 +1,38 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import ProductsActions from '../../actions/ProductsActions';
-import { LOAD_PRODUCTS } from '../../GraphQL/Queries';
+import GetProductsActions from '../../actions/GetProducts';
 import { client } from '../../services/ApolloClient';
 import { GET_PRODUCTS } from '../../actions/types';
+import { gql } from '@apollo/client';
+
+const LOAD_PRODUCTS = (categoryType) => gql`
+	query GetProducts {
+		category (input: {title: "${categoryType}"}) {
+			products {
+				id
+				name
+				gallery
+				inStock
+				attributes {
+					id
+					name
+					type
+					items {
+					  displayValue
+					  value
+					  id
+					}
+				  }
+				prices{
+					currency{
+						label
+						symbol
+					}
+					amount
+				}
+			}
+		}
+	}
+`
 
 
 function* getProductsSaga() {
@@ -11,10 +41,9 @@ function* getProductsSaga() {
 
 function* getProductsHandler(action) {
 	try {
-		const result = yield client.query({query: LOAD_PRODUCTS});
-		
-		console.log(result);
-		yield put(ProductsActions.GetProductsSuccess(result.data.categories))
+		const productQuery = LOAD_PRODUCTS(action.payload);
+		const result = yield client.query({query: productQuery, fetchPolicy: 'no-cache'});
+		yield put(GetProductsActions.GetProductsSuccess(result.data.category.products))
 	} 
 	catch(err) {
 		console.log(err);

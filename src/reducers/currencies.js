@@ -1,10 +1,12 @@
 import { 
 	GET_CURRENCIES_SUCCESS, 
-	GET_CURRENCIES_FAILED 
+	GET_CURRENCIES_FAILED,
+	GET_CURRENCY_TYPE
 } from "../actions/types";
 
 const initialState = {
 	currencies: [],
+	currencyType: '$',
 	loading: false,
 	error: null
 };
@@ -25,6 +27,11 @@ function currenciesReducer(state = initialState, action) {
 				loading: false,
 				error: action.payload
 			};
+		case GET_CURRENCY_TYPE:
+			return {
+				...state,
+				currencyType: action.payload
+			}
 		default: return state;
 	}
 }

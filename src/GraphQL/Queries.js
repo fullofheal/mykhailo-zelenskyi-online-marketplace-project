@@ -1,49 +1,5 @@
 import {gql} from "@apollo/client";
 
-export const LOAD_PRODUCTS = gql`
-	query {
-		categories{
-			name
-			products {
-				name
-				id
-			}
-		}
-	}
-`;
-
-export const LOAD_ALL_PRODUCT_INFO = gql`
-	query {
-		category {
-		name
-		products {
-			id
-			name
-			inStock
-			gallery
-			description
-			category
-			attributes {
-			name
-			items{
-				value
-				displayValue
-			}
-			id
-			type
-			}
-			prices {
-			amount
-			currency{
-				symbol
-			}
-			}
-			brand
-		}
-		}
-	}
-`;
-
 export const LOAD_CATEGORIES = gql`
 query {
 	categories{
@@ -59,3 +15,45 @@ query{
 	}
   }
 `
+
+export const LOAD_ALL_PRODUCTS = gql`
+	query GetTechProducts {
+		category (input: {title: "all"}) {
+			products {
+				id
+				name
+			}
+		}
+	}
+`
+
+export const LOAD_PRODUCT_DETAILS = (productId) => gql`
+	query getProductDetails {
+		product (id: "${productId}") {
+		id
+		name
+		inStock
+		gallery
+		description
+		category
+		attributes {
+			id
+			name
+			type
+			items {
+				displayValue
+				value
+				id
+			}
+		}
+		prices {
+			currency {
+				label
+				symbol
+			}
+			amount
+		}
+		brand
+		}
+	}
+`;

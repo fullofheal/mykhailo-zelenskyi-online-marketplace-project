@@ -12,8 +12,6 @@ function* getCurrenciesSaga() {
 function* getCurrenciesHandler(action) {
 	try {
 		const result = yield client.query({query: LOAD_CURRENCIES});
-		// const result = yield call(client.query, {query: LOAD_CURRENCIES});
-		console.log(result);
 			
 		yield put(CurrenciesActions.GetCurrenciesSuccess(result.data.currencies))
 	} 
