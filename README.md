@@ -1,3 +1,8 @@
+Based on Figma design: https://www.figma.com/file/EbGBJ9G7HX7i29qIj5BHya/Junior-Frontend-Test-Designs-(Public)-(Copy)?node-id=0%3A1&t=OvOs9HRq900nQ4Zj-0
+Product data is fetched from an endpoint using GraphQL Apollo Client.
+Project is based on Class Components only due to special requirements.
+Redux is used for state management, and Redux-Saga is used for asynch operations.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
