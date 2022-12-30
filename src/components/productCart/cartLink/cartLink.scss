@@ -1,0 +1,263 @@
+@import '../../../style/mixins';
+/* width */
+::-webkit-scrollbar {
+	width: 4px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey;
+	border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #5ECE7B;
+	border-radius: 10px;
+  }
+
+
+
+
+.cart-overlay {
+	&__icon {
+		width: 20px;
+		height: 29px;
+		display: flex;
+		align-items: center;
+		padding-top: 5px;
+		cursor: pointer;
+		position: relative;
+		user-select: none;
+	}
+	&__bg {
+		position: fixed;
+		top: 80px;
+		left: 0;
+		height: 100%;
+		margin: 0;
+		width: 100%;
+		background: rgba(57, 55, 72, 0.22);
+		z-index: 9;
+	}
+	&__quantity {
+		display: flex;
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		top: -8%;
+		right: -60%;
+		background-color: #1D1F22;
+		border-radius: 100%;
+		z-index: 10;
+		font-family: 'Roboto';
+		font-size: 14px;
+		line-height: 16px;
+		font-weight: 700;		
+		color: #fff;
+		justify-content: center;
+		align-items: center;
+	}
+	&__products {
+		margin: 0;
+		margin-top: 32px;
+		padding-right: 5px;
+		width: 305px;
+		height: 420px;
+		overflow: auto;
+	}
+	&__title {
+		font-size: 16px;
+		font-weight: 500;
+		span {
+			font-weight: 700;
+		}
+	}
+	&__summary {
+		margin-top: 32px;
+	}
+	&__total {
+		display: flex;
+		justify-content: space-between;
+		* {
+			font-family: "Roboto";
+		}
+		font-size: 16px;
+		line-height: 18px;
+		font-weight: 500;
+	}
+	&__price {
+		font-weight: 700;
+		font-family: 'Raleway';
+	}
+	&__btns {
+		margin-top: 32px;
+		display: flex;
+		justify-content: space-between;
+		* {
+			font-weight: 600;
+		}
+	}
+	&__bag, &__checkout {
+		width: 140px;
+		height: 43px;
+		cursor: pointer;
+	}
+	&__bag {
+		background-color: #fff;
+		border: 1px solid #1D1F22;
+		padding: 13px 36px;
+	}
+	&__checkout {
+		background-color: #5ECE7B;
+		border: none;
+		color: #fff;
+	}
+
+	&__menu {
+		position: absolute;
+		top: 100%;
+		right: 0px;
+		width: 325px;
+		padding: 32px 16px;
+		z-index: 10;
+		// overflow: auto;
+		background-color: #fff;
+		filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
+		z-index: 10;
+
+		.cart-item {
+			display: flex;
+			justify-content: space-between;
+			padding: 0;
+			margin-bottom: 40px;
+			border: none;
+			user-select: none;
+			&:last-child {
+				margin-bottom: 0;
+			}
+			&__info {
+				width: 136px;
+				padding-right: 10px;
+				max-height: 190px;
+				overflow: auto;
+				& .details {
+					&__attributes {
+						margin: 0;
+					}
+					&__header {
+						padding-top: 8px;
+						font-family: 'Raleway';
+						font-size: 14px;
+						line-height: 16px;
+						font-weight: 400;
+					}
+					&__title {
+						* {
+							font-size: 16px;
+							font-weight: 300;
+							line-height: 160%;
+						}
+					}
+					&__name {
+						margin: 0;
+					}
+					&__price {
+						margin-top: 4px;
+						&-value {
+							margin: 0;
+							font-size: 16px;
+							line-height: 160%;
+							font-weight: 500;
+						}
+					}
+					&__wrapper {
+						grid-template: 24px / repeat(auto-fit, minmax(24px, auto));
+						grid-auto-rows: 24px;
+						gap: 8px;
+						&_color {
+							grid-template: 16px / repeat(auto-fill, 16px);
+							grid-auto-rows: 16px;
+							margin-left: 2px;
+						}
+					}
+					&__attribute {
+						font-size: 14px;
+						&_color {
+							width: 16px;
+							height: 16px;
+						}
+						&_color_selected {
+							width: 20px;
+							height: 20px;
+						}
+					}
+				}
+			}
+			&__gallery {
+				display: flex;
+				height: 190px;
+				width: 153px;
+				align-items: center;
+				justify-content: space-between;
+			}
+			&__quantity {
+				height: 100%;
+				width: 24px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				user-select: none;
+				&-plus {
+					position: relative;
+					width: 25px;
+					height: 25px;
+					border: 1px solid black;
+					@include smallPlus;
+					cursor: pointer;
+					// user-select: none;
+				}
+				&-minus {
+					position: relative;
+					width: 25px;
+					height: 25px;
+					border: 1px solid black;
+					@include smallMinus;
+					cursor: pointer;
+					// user-select: none;
+				}
+				&-num {
+					margin: 0 auto;
+					font-size: 16px;
+				}
+			}
+			&__slider {
+				width: 121px;
+				height: 190px;
+			}
+			&__wrapper {
+				width: 100%;
+				height: 100%;
+			}
+			&__field {
+				display: block;
+				height: 100%;
+				width: 100%;
+			}
+			&__picture {
+				display: flex;
+				height: 100%;
+				align-items: center;
+				user-select: none;
+				img {
+					max-height: 100%;
+					width: 100%;			
+					object-fit: cover;
+				}
+			}
+		}
+	}
+}
+
+
+

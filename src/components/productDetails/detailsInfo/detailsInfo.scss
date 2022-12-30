@@ -1,0 +1,113 @@
+.details {
+	&__title {
+		line-height: 27px;
+	}
+	&__brand, &__name {
+		font-size: 27px;
+		line-height: 27px;
+	}
+	&__brand {
+		font-weight: 600;
+	}
+	&__header {
+		font-weight: 700;
+	}
+	&__name {
+		margin-top: 16px;
+		font-weight: 400;
+	}
+	&__header {
+		font-family: 'Roboto Condensed';
+		font-size: 18px;
+		line-height: 18px;
+		padding-top: 24px;
+	}
+	&__attributes {
+		margin-top: 19px;
+	}
+	&__wrapper, &__wrapper_color {
+		display: grid;
+		margin-top: 8px;
+	}
+	&__wrapper {
+		grid-template: 45px / repeat(auto-fill, 63px);
+		grid-auto-rows: 45px;
+		row-gap: 8px;
+		column-gap: 12px;
+		&_color {
+			grid-template: 36px / repeat(auto-fill, 36px);
+			column-gap: 8px;
+			margin-top: 8px;
+			align-items: center;
+			justify-items: center;
+		}
+	}
+	&__attribute {
+		display: flex;
+		border: 1px solid #1D1F22;
+		justify-content: center;
+		align-content: center;
+		flex-wrap: wrap;
+		font-family: 'Source Sans Pro';
+		font-size: 16px;
+		cursor: pointer;
+		&_selected {
+			background-color: #1D1F22;
+			color: #fff;
+		}
+		&_color {
+			width: 32px;
+			height: 32px;
+			cursor: pointer;
+			div {
+				height: 100%;
+			}
+			border: 1px solid #1D1F22;
+			&_selected {
+				padding: 1px;
+				width: 36px;
+				height: 36px;
+				border: 1px solid #5ECE7B;
+				justify-self: center;
+			}
+		}
+	}
+	&__price {
+		margin-top: 12px;
+		&-value{
+			margin-top: 20px;
+			font-size: 24px;
+			font-weight: 700;
+		}
+	}
+	&__cart {
+		position: relative;
+		width: 100%;
+	}
+	&__out-of-stock {
+		position: absolute;
+		top: 100%;
+		color: red;
+	}
+	&__btn {
+		width: 100%;
+		height: 52px;
+		margin-top: 20px;
+		background: #5ECE7B;
+		border: none;
+		color: #fff;
+		font-weight: 600;
+		cursor: pointer;
+	}
+	&__description {
+		margin-top: 40px;
+		height: 103px;
+		*{
+			font-family: 'Roboto';
+			font-size: 16px;
+			line-height: 160%;
+			color: #1D1F22;
+			font-weight: 400;
+		}
+	}
+}

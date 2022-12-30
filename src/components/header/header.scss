@@ -1,0 +1,30 @@
+.header {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	height: 80px;
+	margin: 0;
+	background-color: #fff;
+	z-index: 150;
+	&__bar {
+		margin: 0 auto;
+		width: 1238px;
+		margin-top: 24px;
+		display: flex;
+		justify-content: space-between;
+		align-items: top;
+	}
+	&__right {
+		display: flex;
+		width: 114px;
+		padding-top: 10px;
+		justify-content: space-evenly;
+		position: relative;
+	}
+	&__icon {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
