@@ -2,7 +2,9 @@
 
 ### https://www.figma.com/file/EbGBJ9G7HX7i29qIj5BHya/Junior-Frontend-Test-Designs-(Public)-(Copy)?node-id=0%3A1&t=OvOs9HRq900nQ4Zj-0
 
-## Product data is fetched from an endpoint using GraphQL Apollo Client.
+## Product data is fetched from an endpoint using GraphQL Apollo Client. Endpoint can be found here:
+
+### https://github.com/scandiweb/junior-react-endpoint
 
 ## Project is based on Class Components only due to special requirements.
 
