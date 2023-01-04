@@ -21,6 +21,20 @@ class DetailsInfo extends PureComponent {
 		})
 	}
 	
+	addCartProduct = () => {	
+		return this.props.inStock && this.state.allAttributesSelected ? this.props.addCartProduct({
+			id: this.props.productDetails.id,
+			selectedAttributes: this.props.productAttributes,
+			quantity: 1,
+			productDetails: this.props.productDetails
+		}) : this.props.inStock && !this.state.allAttributesSelected ? 
+			this.setState({
+				showSelectAttributes: true
+			}) : 
+			this.setState({
+				inStock: false
+			})
+	}
 
 	render() {
 		const price = this.props.productDetails.prices ? this.props.productDetails.prices.find(obj => obj.currency.symbol === this.props.currencyType) : {currency: {label: '', symbol: ''}, amount: ''};
@@ -46,20 +60,7 @@ class DetailsInfo extends PureComponent {
 				<div className="details__cart">
 					<button 
 					className="details__btn"
-					onClick={this.props.inStock && this.state.allAttributesSelected ? () => this.props.addCartProduct({
-						id: this.props.productDetails.id,
-						selectedAttributes: this.props.productAttributes,
-						quantity: 1,
-						productDetails: this.props.productDetails
-					}) : this.props.inStock && !this.state.allAttributesSelected ? () => {
-						this.setState({
-							showSelectAttributes: true
-						})
-					} : () => {
-						this.setState({
-							inStock: false
-						})
-					}}>
+					onClick={this.addCartProduct}>
 						ADD TO CART
 					</button>
 					{this.state.inStock ? '' : <div className="details__out-of-stock">

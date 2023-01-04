@@ -29,7 +29,11 @@ function productDetailsReducer(state = initialState, action) {
 		case GET_PRODUCT_DETAILS_FAILED: 
 			return {
 				...state,
-				productDetails: {},
+				productDetails: {
+					attributes: [],
+					gallery: []
+				},
+				productAttributes: {},
 				loading: false,
 				error: action.payload
 			};

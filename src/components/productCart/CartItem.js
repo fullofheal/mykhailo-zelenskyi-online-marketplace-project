@@ -47,11 +47,14 @@ class CartItem extends PureComponent {
 					<div className="cart-item__quantity">
 						<div 
 						className="cart-item__quantity-plus"
-						onClick={() => this.props.changeAmount(1, this.props.selectedProduct.cartItemId)}></div>
-						<div className="cart-item__quantity-num">{this.props.selectedProduct.quantity}</div>
+						onClick={() => this.props.changeAmount(1, this.props.selectedProduct.cartItemId)}>
+						</div>
+						<div className="cart-item__quantity-num">{this.props.selectedProduct.quantity}
+						</div>
 						<div 
 						className="cart-item__quantity-minus"
-						onClick={() => this.props.changeAmount(-1, this.props.selectedProduct.cartItemId)}></div>
+						onClick={() => this.props.changeAmount(-1, this.props.selectedProduct.cartItemId)}>
+						</div>
 					</div>
 					<CartSlider 
 					isSlider={this.props.isSlider}

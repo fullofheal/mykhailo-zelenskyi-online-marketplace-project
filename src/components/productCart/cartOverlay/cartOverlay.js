@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import CartItem from '../../CartItem';
+import CartItem from '../CartItem';
 
 class CartOverlay extends PureComponent {
 

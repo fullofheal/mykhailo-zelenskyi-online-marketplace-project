@@ -1,5 +1,35 @@
 import {gql} from "@apollo/client";
 
+export const LOAD_PRODUCTS = (categoryType) => gql`
+	query GetProducts {
+		category (input: {title: "${categoryType}"}) {
+			products {
+				id
+				name
+				gallery
+				inStock
+				attributes {
+					id
+					name
+					type
+					items {
+					  displayValue
+					  value
+					  id
+					}
+				  }
+				prices{
+					currency{
+						label
+						symbol
+					}
+					amount
+				}
+			}
+		}
+	}
+`
+
 export const LOAD_CATEGORIES = gql`
 query {
 	categories{

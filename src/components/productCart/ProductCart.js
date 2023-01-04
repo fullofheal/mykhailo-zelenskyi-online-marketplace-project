@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import CartItem from "./CartItem";
 import Checkout from "../checkout/checkout";
-import ProductCartActions from "../../actions/ProductCartActions";
+import ProductCartActions from "../../store/actions/ProductCartActions";
 import './productCart.scss';
 
 class ProductCart extends PureComponent {

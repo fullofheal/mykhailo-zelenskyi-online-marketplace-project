@@ -3,9 +3,7 @@ import { ADD_CART_ITEM, CHANGE_AMOUNT } from "../actions/types";
 const localStorageProducts = JSON.parse(localStorage.getItem("selectedProducts"));
 
 const initialState = {
-	selectedProducts: localStorageProducts ? localStorageProducts.selectedProducts : [],
-	loading: false,
-	error: null
+	selectedProducts: localStorageProducts ? localStorageProducts.selectedProducts : []
 };
 
 function productCartReducer(state = initialState, action) {

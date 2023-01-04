@@ -1,8 +1,8 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import CurrenciesActions from '../../actions/CurrenciesActions';
+import CurrenciesActions from '../actions/CurrenciesActions';
 import { LOAD_CURRENCIES } from '../../GraphQL/Queries';
 import { client } from '../../services/ApolloClient';
-import { GET_CURRENCIES } from '../../actions/types';
+import { GET_CURRENCIES } from '../actions/types';
 
 
 function* getCurrenciesSaga() {
@@ -16,8 +16,8 @@ function* getCurrenciesHandler(action) {
 		yield put(CurrenciesActions.GetCurrenciesSuccess(result.data.currencies))
 	} 
 	catch(err) {
+		yield put(CurrenciesActions.GetCurrenciesFailed(err));
 		console.log(err);
-		// yield put(CurrenciesActions.GetCurrenciesFailed(err))
 	}
 }
 

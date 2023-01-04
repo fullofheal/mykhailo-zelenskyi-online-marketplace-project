@@ -1,9 +1,9 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import CategoriesActions from '../../actions/CategoriesActions';
-import GetProductsActions from '../../actions/GetProducts';
-import {LOAD_CATEGORIES} from '../../GraphQL/Queries';
+import CategoriesActions from '../actions/CategoriesActions';
+import GetProductsActions from '../actions/GetProducts';
+import { LOAD_CATEGORIES } from '../../GraphQL/Queries';
 import { client } from '../../services/ApolloClient';
-import { GET_CATEGORIES } from '../../actions/types';
+import { GET_CATEGORIES } from '../actions/types';
 
 
 function* getCategoriesSaga() {
@@ -18,8 +18,8 @@ function* getCategoriesHandler(action) {
 		yield put(GetProductsActions.GetProducts(result.data.categories[0].name))
 	} 
 	catch(err) {
+		yield put(CategoriesActions.GetCategoriesFailed(err));
 		console.log(err);
-		// yield put(CategoriesActions.GetCategoriesFailed(err))
 	}
 }
 

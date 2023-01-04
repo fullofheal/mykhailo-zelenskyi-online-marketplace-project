@@ -1,27 +1,28 @@
 import { Component } from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import ProductCartActions from "../../actions/ProductCartActions";
+import ProductCartActions from "../../store/actions/ProductCartActions";
 import CartIcon from "../../icons/cartIcon";
+import ErrorMessage from "../errorMessage/errorMessage";
 import './products.scss';
 
 class Products extends Component{
+
+	setDefaultAttributes = (product) => {
+		let selectedAttributes = {};
+		if (product.attributes.length) {
+			product.attributes.map(attribute => {
+				return selectedAttributes[attribute.name] = attribute.items[0].value					
+			})
+		}
+		return selectedAttributes;
+	}
 	
 	render() {
 
 		const productList = this.props.products.map(product => {
 
 			const inStock = product.inStock ? '' : 'out-of-stock'
-
-			const setDefaultAttributes = (product) => {
-				let selectedAttributes = {};
-				if (product.attributes.length) {
-					product.attributes.map(attribute => {
-						return selectedAttributes[attribute.name] = attribute.items[0].value					
-					})
-				}
-				return selectedAttributes;
-			}
 
 			return <li 
 				key={product.id}>
@@ -44,7 +45,7 @@ class Products extends Component{
 						e.preventDefault();
 						this.props.addCartProduct({
 							id: product.id,
-							selectedAttributes: setDefaultAttributes(product),
+							selectedAttributes: this.setDefaultAttributes(product),
 							quantity: 1,
 							productDetails: product
 						}) 
@@ -54,12 +55,12 @@ class Products extends Component{
 		})
 
 		return (
-				<div className="container">
-					<div className="product__category">{this.props.selectedCategory.toUpperCase()}</div>
-					<ul className="product__wrapper">
-						{productList}
-					</ul>
-				</div>
+				this.props.error ? <ErrorMessage/> : <div className="container">
+				<div className="product__category">{this.props.selectedCategory.toUpperCase()}</div>
+				<ul className="product__wrapper">
+					{productList}
+				</ul>
+			</div>
 		);
 	}
 }
@@ -67,7 +68,8 @@ class Products extends Component{
 const mapStateToProps = state => ({
 	products: state.products.products,
 	selectedCategory: state.products.selectedCategory,
-	currencyType: state.currencies.currencyType
+	currencyType: state.currencies.currencyType,
+	error: state.products.error
   });
   
   

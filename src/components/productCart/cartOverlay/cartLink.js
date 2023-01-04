@@ -1,9 +1,9 @@
 import { PureComponent } from "react";
 import CartLinkIcon from "../../../icons/cartLinkIcon";
-import CartOverlay from "./cartOverlay/cartOverlay";
+import CartOverlay from "./cartOverlay";
 import Checkout from "../../checkout/checkout";
 import { connect } from 'react-redux';
-import ProductCartActions from "../../../actions/ProductCartActions";
+import ProductCartActions from "../../../store/actions/ProductCartActions";
 import './cartLink.scss';
 
 
@@ -15,6 +15,23 @@ class CartLink extends PureComponent {
 		totalAmount: 0,
 		totalQuantity: null
 	};
+
+	
+	componentDidMount() {
+
+		this.setState({
+			totalAmount: this.totalAmount(),
+			totalQuantity: this.totalQuantity()
+		})
+
+	}
+
+	componentDidUpdate() {
+		this.setState({
+			totalAmount: this.totalAmount(),
+			totalQuantity: this.totalQuantity()
+		})
+	}
 
 	onCartClicked = (e) => {
 		e.stopPropagation();
@@ -60,22 +77,6 @@ class CartLink extends PureComponent {
 		this.props.selectedProducts.reduce((sum, current) => {
 			return sum + current.quantity
 		}, 0) : 0
-
-	componentDidMount() {
-
-		this.setState({
-			totalAmount: this.totalAmount(),
-			totalQuantity: this.totalQuantity()
-		})
-
-	}
-
-	componentDidUpdate() {
-		this.setState({
-			totalAmount: this.totalAmount(),
-			totalQuantity: this.totalQuantity()
-		})
-	}
 
 	render() {
 

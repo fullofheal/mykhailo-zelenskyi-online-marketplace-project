@@ -1,7 +1,8 @@
 import { Component } from "react";
-import CurrenciesActions from '../../actions/CurrenciesActions';
+import CurrenciesActions from "../../store/actions/CurrenciesActions";
 import { connect } from 'react-redux';
 import ArrowSmall from "../../icons/ArrowSmall";
+import ErrorMessage from "../errorMessage/errorMessage";
 import './Currencies.scss';
 
 class Currencies extends Component{
@@ -10,6 +11,24 @@ class Currencies extends Component{
 		showMenu: false,
 		selectedValue: '$'
 	};
+
+	componentDidMount() {
+		this.props.getCurrencies();
+
+		window.addEventListener('click', () => {
+			this.setState({
+				showMenu: false
+			});
+		});
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('click', () => {
+			this.setState({
+				showMenu: false
+			});
+		})
+	}
 
 	onMenuClicked = (e) => {
 		e.stopPropagation();
@@ -23,52 +42,42 @@ class Currencies extends Component{
 			selectedValue: currencySelected.symbol
 		})
 	}
-
-	componentDidMount() {
-		this.props.getCurrencies();
-
-		const hideMenu = () => {
-			this.setState({
-				showMenu: false
-			});
-		}
-		window.addEventListener('click', hideMenu);
-
-	}
 	
 	render() {
 		return (
-				<div className="dropdown">
-					<div 
-					className="dropdown__input"
-					onClick={this.onMenuClicked}>
-						<div className="dropdown__selected">{this.state.selectedValue}</div>
-						<div className="dropdown__tool">
-								<ArrowSmall isUp={this.state.showMenu ? true : false} />
-						</div>
+			this.props.error ? <ErrorMessage/> : 
+			<div className="dropdown">
+				<div 
+				className="dropdown__input"
+				onClick={this.onMenuClicked}>
+					<div className="dropdown__selected">{this.state.selectedValue}</div>
+					<div className="dropdown__tool">
+							<ArrowSmall isUp={this.state.showMenu ? true : false} />
 					</div>
-					{this.state.showMenu && (
-						<div className="dropdown__menu">
-						{this.props.currencies.map(currency => (
-							<div 
-							key={currency.label} 
-							className="dropdown__item"
-							onClick={() => {
-								this.onCurrencyClicked(currency);
-								this.props.getCurrencyType(currency.symbol);
-							}}>
-							<span>{currency.symbol} {currency.label}</span>
-							</div>
-						))}
-					</div>
-					)}
 				</div>
+				{this.state.showMenu && (
+					<div className="dropdown__menu">
+					{this.props.currencies.map(currency => (
+						<div 
+						key={currency.label} 
+						className="dropdown__item"
+						onClick={() => {
+							this.onCurrencyClicked(currency);
+							this.props.getCurrencyType(currency.symbol);
+						}}>
+						<span>{currency.symbol} {currency.label}</span>
+						</div>
+					))}
+					</div>
+				)}
+	</div>	
 		);
 	}
 }
 
 const mapStateToProps = state => ({
 	currencies: state.currencies.currencies,
+	error: state.currencies.error,
 	currencyType: state.currencies.currencyType
   });
   

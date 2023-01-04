@@ -1,7 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import ProductDetailsActions from '../../actions/ProductDetailsActions';
+import ProductDetailsActions from '../actions/ProductDetailsActions';
 import { client } from '../../services/ApolloClient';
-import { GET_PRODUCT_DETAILS } from '../../actions/types';
+import { GET_PRODUCT_DETAILS } from '../actions/types';
 import { LOAD_PRODUCT_DETAILS } from '../../GraphQL/Queries';
 
 
@@ -17,8 +17,8 @@ function* getProductDetailsHandler(action) {
 		yield put(ProductDetailsActions.GetProductDetailsSuccess(result.data.product));
 	} 
 	catch(err) {
+		yield put(ProductDetailsActions.GetCategoriesFailed(err));
 		console.log(err);
-		// yield put(CategoriesActions.GetCategoriesFailed(err))
 	}
 }
 

@@ -13,9 +13,8 @@ class Attribute extends PureComponent {
 	}
 
 	focusOnAttribute = (i, isColor) => {
-
-        this.attributeRefs.forEach(attribute => attribute.classList.remove(isColor ? 'details__attribute_color_selected' : 'details__attribute_selected'));
-        this.attributeRefs[i].classList.add(isColor ? 'details__attribute_color_selected' : 'details__attribute_selected');
+		this.attributeRefs.forEach(attribute => attribute.classList.remove(isColor ? 'details__attribute_color_selected' : 'details__attribute_selected'));
+		this.attributeRefs[i].classList.add(isColor ? 'details__attribute_color_selected' : 'details__attribute_selected');
     }
 
 	render() {
@@ -32,7 +31,6 @@ class Attribute extends PureComponent {
 			} else {
 				if (this.props.selectedProduct) {
 					const selectedAttribute = this.props.selectedProduct.selectedAttributes[attributeSet.id];
-
 					return selectedAttribute === attribute.value ? "details__attribute details__attribute_selected" : "details__attribute"
 				} else {
 					return "details__attribute"
@@ -49,7 +47,9 @@ class Attribute extends PureComponent {
 								key={attribute.id} 
 								className={attributeClass(attribute, this.props.attributeSet, true)}
 								ref={this.setRef}
-								onClick={this.props.isOverlay ? () => {} : () => {
+								onClick={this.props.isOverlay ? 
+									() => {} : 
+									() => {
 									this.focusOnAttribute(i, true);
 									this.props.setProductAttributes && this.props.setProductAttributes({
 										attributeType: this.props.attributeSet.name,
@@ -64,7 +64,9 @@ class Attribute extends PureComponent {
 								key={attribute.id} 
 								className={attributeClass(attribute, this.props.attributeSet)}
 								ref={this.setRef}
-								onClick={this.props.isOverlay ? () => {} : () => {
+								onClick={this.props.isOverlay ? 
+									() => {} : 
+									() => {
 									this.focusOnAttribute(i)
 									this.props.setProductAttributes({
 										attributeType: this.props.attributeSet.name,

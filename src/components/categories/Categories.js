@@ -1,8 +1,9 @@
 import { Component } from "react";
-import CategoriesActions from '../../actions/CategoriesActions';
-import GetProductsActions from "../../actions/GetProducts";
+import CategoriesActions from "../../store/actions/CategoriesActions";
+import GetProductsActions from "../../store/actions/GetProducts";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+import ErrorMessage from "../errorMessage/errorMessage";
 import './Categories.scss';
 
 class Categories extends Component{
@@ -11,7 +12,6 @@ class Categories extends Component{
 
 	componentDidMount() {
 		this.props.getCategories();
-		// this.focusOnCategory(0);
 	}
 
 	componentDidUpdate() {
@@ -23,8 +23,8 @@ class Categories extends Component{
 	}
 
 	focusOnCategory = (i) => {
-        this.categoryRefs.forEach(category => category.classList.remove('active'));
-        this.categoryRefs[i].classList.add("active");
+		this.categoryRefs.forEach(category => category.classList.remove('active'));
+		this.categoryRefs[i].classList.add("active");
     }
 
 	onClickCategory(categoryName) {
@@ -33,21 +33,20 @@ class Categories extends Component{
 
 	render() {
 		return (
-				<div className="categories">
+				this.props.error ? <ErrorMessage/> : <div className="categories">
 				{this.props.categories.map((category, i) => {
 					return <Link key={category.name} to="/">
-						<button 
-						href="#"
-						className="categories__btn"
-						ref={this.setRef}
-						onClick={() => {
-							this.focusOnCategory(i);
-							this.onClickCategory(category.name);
-						}}>
-						<div className="categories__name">
-						{category.name.toUpperCase()}
-						</div>
-						</button>
+								<button 
+								className="categories__btn"
+								ref={this.setRef}
+								onClick={() => {
+									this.focusOnCategory(i);
+									this.onClickCategory(category.name);
+								}}>
+									<div className="categories__name">
+									{category.name.toUpperCase()}
+									</div>
+								</button>
 					</Link>
 				})}
 				</div>
@@ -56,7 +55,8 @@ class Categories extends Component{
 }
 
 const mapStateToProps = state => ({
-	categories: state.categories.categories
+	categories: state.categories.categories,
+	error: state.categories.error
   });
   
   

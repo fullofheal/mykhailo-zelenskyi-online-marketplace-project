@@ -2,7 +2,7 @@ import { PureComponent } from "react";
 import { Link } from "react-router-dom";
 import Categories from "../categories/Categories";
 import Currencies from "../currencies/Currencies";
-import CartLink from "../productCart/cartLink/cartLink";
+import CartLink from '../productCart/cartOverlay/cartLink';
 import ShopIcon from "../../icons/shopIcon";
 import './header.scss';
 

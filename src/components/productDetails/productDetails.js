@@ -1,11 +1,12 @@
 import { Component } from "react";
-import ProductDetailsActions from "../../actions/ProductDetailsActions";
-import ProductAttributesActions from "../../actions/ProductAttributes";
-import ProductCartActions from "../../actions/ProductCartActions";
+import ProductDetailsActions from "../../store/actions/ProductDetailsActions";
+import ProductAttributesActions from "../../store/actions/ProductAttributes";
+import ProductCartActions from "../../store/actions/ProductCartActions";
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import DetailsPictures from "./detailsPictures/detailsPictures";
 import DetailsInfo from "./detailsInfo/detailsInfo";
+import ErrorMessage from '../errorMessage/errorMessage';
 import './productDetails.scss';
 
 function withParams(Component) {
@@ -24,7 +25,8 @@ class ProductDetails extends Component {
 	}	
 
 	render() {
-		return <div className="details">
+		return (
+			this.props.error ? <ErrorMessage/> : <div className="details">
 			{this.props.productDetails && (<DetailsPictures 
 			pictures={this.props.productDetails.gallery}
 			inStock={this.props.productDetails.inStock}/>)}
@@ -36,6 +38,7 @@ class ProductDetails extends Component {
 			addCartProduct={this.props.addCartProduct}
 			productAttributes={this.props.productAttributes}/>
 		</div>
+		)
 	}
 }
 
@@ -44,7 +47,8 @@ const mapStateToProps = state => ({
 	productId: state.productDetails.productId,
 	productDetails: state.productDetails.productDetails,
 	productAttributes: state.productDetails.productAttributes,
-	currencyType: state.currencies.currencyType
+	currencyType: state.currencies.currencyType,
+	error: state.productDetails.error
   });
 
 export default connect(mapStateToProps, {
